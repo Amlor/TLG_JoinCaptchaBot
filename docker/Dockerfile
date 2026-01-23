@@ -52,10 +52,11 @@ FROM builder-deps AS builder
 # Build the code as unprivileged user
 USER ${BOT_USER}
 WORKDIR ${BOT_HOME_DIR}
-RUN git clone ${GITHUB_URL} ${APP_DIR} && \
-    python3 -m pip install --user --requirement ${APP_DIR}/requirements.txt && \
-    cd ${APP_DIR}/src && \
-    chown -cR ${BOT_USER}:${BOT_GROUP} ${BOT_HOME_DIR} && \
+RUN git clone ${GITHUB_URL} ${APP_DIR}
+RUN git checkout armmesh
+RUN python3 -m pip install --user --requirement ${APP_DIR}/requirements.txt && \
+    cd ${APP_DIR}/src
+RUN chown -cR ${BOT_USER}:${BOT_GROUP} ${BOT_HOME_DIR} && \
     rm -rf ${BOT_HOME_DIR}/.cache && \
     find ${APP_DIR} -iname '.git*' -print0 | xargs -0 -r -t rm -rf
 
