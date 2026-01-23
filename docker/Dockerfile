@@ -1,7 +1,7 @@
 # This Dockerfile has buildkit syntax, to allow build steps to be cached
 # and speed up when rebuilding
 
-FROM python:3.8.8-slim-buster AS base
+FROM python:3.10-bookworm AS base
 
 # Build ARGs
 ARG BOT_PROJECT="captcha-bot"
@@ -9,7 +9,7 @@ ARG BOT_USER="nobody"
 ARG BOT_GROUP="nogroup"
 ARG BOT_HOME_DIR="/srv"
 ARG APP_DIR="${BOT_HOME_DIR}/app"
-ARG GITHUB_URL="https://github.com/J-Rios/TLG_JoinCaptchaBot"
+ARG GITHUB_URL="https://github.com/Amlor/TLG_JoinCaptchaBot.git"
 
 # Export ARGs as ENV vars so they can be shared among steps
 ENV BOT_PROJECT="${BOT_PROJECT}" \
@@ -76,4 +76,4 @@ RUN chown -R "${BOT_USER}:${BOT_GROUP}" ${BOT_HOME_DIR} && \
 # Set up to run as an unprivileged user
 USER ${BOT_USER}
 WORKDIR ${APP_DIR}
-CMD ["./tools/entrypoint.sh"]
+CMD ["bash", "./tools/entrypoint.sh"]

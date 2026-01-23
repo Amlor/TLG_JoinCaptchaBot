@@ -1,0 +1,9 @@
+services:
+  tgbot:
+    container_name: tgbot
+    build: ./docker
+    volumes: 
+    - "./data/settings.py:/srv/app/src/settings.py"
+    - "./data/data:/srv/app/src/data"
+    restart: always
+
