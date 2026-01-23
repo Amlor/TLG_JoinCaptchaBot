@@ -53,7 +53,7 @@ FROM builder-deps AS builder
 USER ${BOT_USER}
 WORKDIR ${BOT_HOME_DIR}
 RUN git clone ${GITHUB_URL} ${APP_DIR}
-RUN git checkout armmesh
+RUN cd ${APP_DIR} && git checkout armmesh
 RUN python3 -m pip install --user --requirement ${APP_DIR}/requirements.txt && \
     cd ${APP_DIR}/src
 RUN chown -cR ${BOT_USER}:${BOT_GROUP} ${BOT_HOME_DIR} && \
